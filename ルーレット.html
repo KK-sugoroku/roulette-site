@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)file:///C:/Users/kai05/Downloads/roulette_website.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>ルーレット</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #wheel {
+            width: 300px;
+            height: 300px;
+            border: 10px solid #333;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .segment {
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0% 0%;
+            background-color: lightblue;
+            border: 1px solid #000;
+        }
+        #spinBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>ルーレットを回そう！</h1>
+    <div id="wheel" style="transition: transform 4s ease-out; transform: rotate(2070deg);"><div class="segment" style="transform: rotate(0deg) skewY(-30deg); background-color: rgb(255, 0, 0);"></div><div class="segment" style="transform: rotate(60deg) skewY(-30deg); background-color: rgb(0, 0, 255);"></div><div class="segment" style="transform: rotate(120deg) skewY(-30deg); background-color: rgb(0, 255, 0);"></div><div class="segment" style="transform: rotate(180deg) skewY(-30deg); background-color: rgb(255, 255, 0);"></div><div class="segment" style="transform: rotate(240deg) skewY(-30deg); background-color: rgb(128, 0, 128);"></div><div class="segment" style="transform: rotate(300deg) skewY(-30deg); background-color: rgb(255, 165, 0);"></div></div>
+    <button id="spinBtn">回す</button>
+    <div id="result">結果: 青</div>
+
+    <script>
+        const wheel = document.getElementById("wheel");
+        const result = document.getElementById("result");
+        const segments = ["赤", "青", "緑", "黄", "紫", "オレンジ"];
+        const colors = ["#f00", "#00f", "#0f0", "#ff0", "#800080", "#ffa500"];
+
+        // セグメントを描画
+        const angle = 360 / segments.length;
+        segments.forEach((text, i) => {
+            const segment = document.createElement("div");
+            segment.className = "segment";
+            segment.style.transform = `rotate(${i * angle}deg) skewY(-${90 - angle}deg)`;
+            segment.style.backgroundColor = colors[i];
+            wheel.appendChild(segment);
+        });
+
+        // 回転処理
+        document.getElementById("spinBtn").onclick = () => {
+            const randomIndex = Math.floor(Math.random() * segments.length);
+            const rotation = 360 * 5 + (360 - randomIndex * angle - angle / 2);
+            wheel.style.transition = "transform 4s ease-out";
+            wheel.style.transform = `rotate(${rotation}deg)`;
+
+            setTimeout(() => {
+                result.textContent = `結果: ${segments[randomIndex]}`;
+            }, 4000);
+        };
+    </script>
+
+
+</body></html>
