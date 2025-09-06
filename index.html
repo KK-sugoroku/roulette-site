@@ -194,7 +194,7 @@
 
             setTimeout(() => {
                 const finalAngle = totalRotation % 360;
-                const index = Math.floor((360 - finalAngle + segmentAngle / 2) % 360 / segmentAngle);
+                const index = Math.floor((360 - finalAngle + segmentAngle / 2.7) % 360 / segmentAngle);
                 const selected = icons[index];
                 result.textContent = `結果: ${selected}`;
 
@@ -216,6 +216,7 @@
     </script>
 </body>
 </html>
+
 
 
 
